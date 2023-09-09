@@ -5,6 +5,15 @@ enum Operation {
     Divide(f64, f64),
 }
 
+fn calculate(operation: &Operation) -> f64 {
+    match operation {
+        Operation::Add(a, b) => a + b,
+        Operation::Subtract(a, b) => a - b,
+        Operation::Multiply(a, b) => a * b,
+        Operation::Divide(a, b) => a / b,
+    }
+}
+
 fn main() {
     println!("Hello, world!");
 }
