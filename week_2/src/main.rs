@@ -17,3 +17,18 @@ fn calculate(operation: &Operation) -> f64 {
 fn main() {
     println!("Hello, world!");
 }
+
+#[test]
+fn calculate_operation_should_yield_correct_result() {
+    // Addition
+    assert_eq!(calculate(&Operation::Add(2.0, 3.0)), 5.0);
+
+    // Subtraction
+    assert_eq!(calculate(&Operation::Subtract(7.0, 6.0)), 1.0);
+
+    // Multiplication
+    assert_eq!(calculate(&Operation::Multiply(12.0, 12.0)), 144.0);
+
+    // Division
+    assert_eq!(calculate(&Operation::Divide(12.0, 6.0)), 2.0);
+}
