@@ -1,3 +1,5 @@
+use std::io;
+
 enum Operation {
     Add(f64, f64),
     Subtract(f64, f64),
@@ -15,7 +17,49 @@ fn calculate(operation: &Operation) -> f64 {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let mut first_number = String::new();
+    let mut operation = String::new();
+    let mut second_number = String::new();
+
+    println!("Enter first number: ");
+
+    io::stdin()
+        .read_line(&mut first_number)
+        .expect("Failed to read line");
+
+    let first_number: f64 = first_number.trim().parse().expect("Please type a number");
+
+    println!("Operation [CHOOSE ONE: +, -, *, /]: ");
+
+    io::stdin()
+        .read_line(&mut operation)
+        .expect("Failed to read line");
+
+    let operation = operation.trim();
+
+    if !matches!(operation, "+" | "-" | "*" | "/") {
+        panic!("Invalid operator");
+    }
+
+    println!("Enter second number: ");
+
+    io::stdin()
+        .read_line(&mut second_number)
+        .expect("Failed to read line");
+
+    let second_number: f64 = second_number.trim().parse().expect("Please type a number");
+
+    let operation = match operation {
+        "+" => Operation::Add(first_number, second_number),
+        "-" => Operation::Subtract(first_number, second_number),
+        "*" => Operation::Multiply(first_number, second_number),
+        "/" => Operation::Divide(first_number, second_number),
+        _ => panic!("Unknown operation"),
+    };
+
+    let result = calculate(&operation);
+
+    println!("Calculation result: {result}");
 }
 
 #[test]
