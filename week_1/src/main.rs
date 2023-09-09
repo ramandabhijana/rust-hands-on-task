@@ -6,7 +6,12 @@ pub fn concatenate_strings(s1: &str, s2: &str) -> String {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let string1 = "Hello";
+    let string2 = "World";
+
+    let concatenated_strings = concatenate_strings(string1, string2);
+
+    println!("concatenated_strings: {}", concatenated_strings);
 }
 
 #[test]
