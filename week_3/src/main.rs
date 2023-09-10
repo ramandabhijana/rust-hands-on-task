@@ -6,7 +6,20 @@ impl<T: PartialEq> FilterCondition<T> {
     }
 }
 
-fn main() {}
+fn custom_filter<T, I>(collection: I, condition: &FilterCondition<T>) -> Vec<T>
+where
+    T: PartialEq,
+    I: Iterator<Item = T>,
+{
+    collection.filter(|i| condition.is_match(i)).collect()
+}
+
+fn main() {
+    let collection = vec![16, 128, 32, 64, 128, 512];
+    let condition = FilterCondition(128);
+    let result = custom_filter(collection.into_iter(), &condition);
+    println!("Filtered result: {:?}", result);
+}
 
 #[cfg(test)]
 mod tests {
